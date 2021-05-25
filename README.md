@@ -77,6 +77,9 @@ Will run the video at 48 FPS. The default FPS is 60.
 
 * [Keras documentation](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model) 
 
+### References
+* [Nvidia: End to End Learning for Self-Driving Cars](https://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf)
+
 ### Versioning
 
 * We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).

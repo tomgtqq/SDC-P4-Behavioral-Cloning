@@ -1,12 +1,10 @@
 import numpy as np
 import pandas as pd
-# import cv2
 from sklearn.model_selection import train_test_split
 
 from keras.models import Sequential
 from keras import layers
 from keras.regularizers import l2
-# from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.preprocessing.image import ImageDataGenerator
 
@@ -53,9 +51,9 @@ def build_model():
     layers.Conv2D(64, kernel_size=(3, 3), activation='relu'),
     layers.Conv2D(64, kernel_size=(3, 3), activation='relu'),
     layers.Flatten(),
-    layers.Dense(100, activation='relu'),  #,kernel_regularizer='l2'
-    layers.Dense(50, activation='relu' ),  #,kernel_regularizer='l2'
-    layers.Dense(10, activation='relu' ),  #,kernel_regularizer='l2'
+    layers.Dense(100, activation='relu', kernel_regularizer='l2'),  
+    layers.Dense(50, activation='relu', kernel_regularizer='l2'),
+    layers.Dense(10, activation='relu')
     layers.Dense(1)
 ])
 
