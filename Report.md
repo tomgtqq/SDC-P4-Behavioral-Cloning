@@ -59,16 +59,16 @@ callbacks = [
 The model was trained and validated on different data sets to ensure that the model was not overfitting. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 ```
-    history = model.fit_generator(train_generator, steps_per_epoch=STEP_SIZE_TRAIN, 
-                                  validation_data=valid_generator, validation_steps=STEP_SIZE_VALID,
-                                  epochs=EPOCHS, verbose=1, callbacks=callbacks)
+history = model.fit_generator(train_generator, steps_per_epoch=STEP_SIZE_TRAIN, 
+                              validation_data=valid_generator, validation_steps=STEP_SIZE_VALID,
+                              epochs=EPOCHS, verbose=1, callbacks=callbacks)
 ```
 
 #### 3. Model parameter tuning
 
 The model used an adam optimizer, so the learning rate was not tuned manually.
 ```
-  model.compile(loss='mse', optimizer='Adam') 
+model.compile(loss='mse', optimizer='Adam') 
 ```
 
 #### 4. Appropriate training data
@@ -123,8 +123,8 @@ Here is a visualization of the architecture:
 To augment the data sat, I used left\center\right cameras and setted CORRECTION config as '0.2'
 
 ```
-  new_df['features'] = pd.concat([df['center'], df['left'], df['right']], ignore_index=True)
-    new_df['labels']  = pd.concat([df['steering'], df['steering']+CORRECTION, df['steering']-CORRECTION], ignore_index=True)
+new_df['features'] = pd.concat([df['center'], df['left'], df['right']], ignore_index=True)
+new_df['labels']  = pd.concat([df['steering'], df['steering']+CORRECTION, df['steering']-CORRECTION], ignore_index=True)
 ```
 
 
@@ -134,17 +134,17 @@ To augment the data sat, I used left\center\right cameras and setted CORRECTION 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 15  as evidenced by val 0.007 I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
 ```
-  callbacks = [
-        EarlyStopping(monitor='val_loss', patience=4),
-        ModelCheckpoint('model.h5', monitor='val_loss', verbose=1, save_best_only=True, mode='auto')
-    ]
-    model.compile(loss='mse', optimizer='Adam') 
-    
-    history = model.fit_generator(train_generator, steps_per_epoch=STEP_SIZE_TRAIN, 
-                                  validation_data=valid_generator, validation_steps=STEP_SIZE_VALID,
-                                  epochs=EPOCHS, verbose=1, callbacks=callbacks)
+callbacks = [
+  EarlyStopping(monitor='val_loss', patience=4),
+  ModelCheckpoint('model.h5', monitor='val_loss', verbose=1, save_best_only=True, mode='auto')
+]
+model.compile(loss='mse', optimizer='Adam') 
+
+history = model.fit_generator(train_generator, steps_per_epoch=STEP_SIZE_TRAIN, 
+                            validation_data=valid_generator, validation_steps=STEP_SIZE_VALID,
+                            epochs=EPOCHS, verbose=1, callbacks=callbacks)
 ```
 
 References
 
-[Nvidia arXiv:1604.07316v1 End to End Learning for Self-Driving Cars ](https://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf)
+[Nvidia: End to End Learning for Self-Driving Cars ](https://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf)
